@@ -1,6 +1,6 @@
-# This was just an app to get Familiar with React-Redux from scratch.
+# This was just the Front-end of the app to get Familiar with React-Redux from scratch.
 
-
+Backend of this app: https://github.com/Fiend-Star-666/Tennis-Info
 
 
 

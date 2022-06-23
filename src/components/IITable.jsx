@@ -3,6 +3,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { searchSelector, resetSearch } from "../redxSlice/searchNameSlice";
 import { resetSort, sortSelector } from "../redxSlice/sortHandlerSlice";
 import PlayerService from '../services/PlayerService';
+import { pageSelector, pageValues, resetPageValues } from "../redxSlice/pageHandlerSlice";
+import ITableHeader from "./ITableHeader";
 
 export default function IITable() {
 
@@ -14,35 +16,26 @@ export default function IITable() {
     }
 
     const [playersData, setPlayersData] = useState([]);
-    const [pageNumber, setPageNumber] = useState('');
-    const [pageSize, setPageSize] = useState('');
-    const [totalPages, setTotalPages] = useState('');
 
-
-    const pageNumberHandler = (e) => {
-        setPageNumber(e.target.value);
-    }
-
-    const pageSizeHandler = (e) => {
-        setPageSize(e.target.value);
-    }
 
     const dispatch = useDispatch();
 
     const searchForm = useSelector(searchSelector);
-    
+
     const sortForm = useSelector(sortSelector);
+
+    const pageForm = useSelector(pageSelector);
 
     useEffect(() => {
 
         if (searchForm.searchName !== '') {
 
             let url = searchForm.searchName + '?';
-            if (pageSize !== undefined) {
-                url += 'size=' + pageSize;
+            if (pageForm.pageSize !== undefined) {
+                url += 'size=' + pageForm.pageSize;
             }
-            if (pageNumber !== undefined) {
-                url += '&page=' + pageNumber;
+            if (pageForm.pageNumber !== undefined) {
+                url += '&page=' + pageForm.pageNumber;
             }
 
             if (sortForm.sortRequired) {
@@ -50,64 +43,36 @@ export default function IITable() {
             }
 
             PlayerService.getSearchedPlayers(url).then((res) => {
-                console.log(res);
+                //console.log(res);
                 const playerPage = res.data;
                 setPlayersData(playerPage.content);
-                setPageNumber(res.data.number);
-                setPageSize(res.data.size);
-                setTotalPages(res.data.totalPages);
+                dispatch(pageValues({
+                    pageNumber: playerPage.number,
+                    pageSize: playerPage.size,
+                    totalPages: playerPage.totalPages,
+                }));
             });
         }
         else {
             dispatch(resetSearch());
             dispatch(resetSort());
-            setPageNumber('');
-            setPageSize('');
-            setTotalPages(0);
+            dispatch(resetPageValues());
             setPlayersData([]);
         }
-    }, [searchForm, sortForm, pageSize, pageNumber, dispatch]);
+    }, [searchForm, sortForm, pageForm, dispatch]);
 
     return (
         <>
             <br></br>
-            <div style={{ width: 'auto', backgroundColor: 'lightgray', alignItems: 'center', boxShadow: '2px 2px' }}>
-                <label>Page Size: &emsp;</label>
-                <select value={pageSize} onChange={pageSizeHandler} >
-                    <option value="">Choose Option</option>
-                    <option value="5">5</option>
-                    <option value="10">10</option>
-                    <option value="20">20</option>
-                    <option value="30">30</option>
-                </select>
-                &emsp;
-                &emsp;
-                &emsp;
-                &emsp;
-                <label>Page Number: &emsp;0 - {totalPages}
-                    <input type="text" placeholder='Enter Page Number here' className="form-control" value={pageNumber} onChange={pageNumberHandler} style={{ width: '200px' }} />
-                </label>
-                &emsp;
-                &emsp;
-                &emsp;
-                &emsp;
-            </div>
             <br></br>
             <div className="row">
                 <table className="table table-striped table-bordered">
-                    <thead>
-                        <tr>
-                            <th>Rank</th>
-                            <th>Name</th>
-                            <th>Date of Birth</th>
-                            <th>Points</th>
-                        </tr>
-                    </thead>
+                    {ITableHeader()}
                     <tbody>
                         {
                             playersData.map(
                                 playerData =>
-                                    <tr key={playerData.id}>
+                                    <tr key={Math.random()}>
                                         <td>    {playerData.rankOfPlayer}                                </td>
                                         <td>    {playerData.name}                                        </td>
                                         <td style={{ width: '200px' }}>{viewDate(playerData.dateOfBirth)}</td>
@@ -121,3 +86,19 @@ export default function IITable() {
         </>
     )
 }
+
+/*
+
+    const [pageNumber, setPageNumber] = useState('');
+    const [pageSize, setPageSize] = useState('');
+    const [totalPages, setTotalPages] = useState('');
+
+
+    const pageNumberHandler = (e) => {
+        setPageNumber(e.target.value);
+    }
+
+    const pageSizeHandler = (e) => {
+        setPageSize(e.target.value);
+    }
+*/

@@ -83,10 +83,10 @@ export default function ISort() {
 
     if (localsort.sortRequired) {
         SortButton = (
-            <div className="btn-group">
-                <button className="btn btn-sucess" onClick={submitForm}>Sort</button>
-                &emsp;
-                &emsp;
+            <div className="col">
+                <button className="btn btn-success" onClick={submitForm}>Sort</button>
+                <br></br>
+                <br></br>
                 <button className="btn btn-danger" onClick={resetForm}>Reset</button>
             </div>
         );
@@ -96,15 +96,26 @@ export default function ISort() {
     return (
         <>
             <div style={{ backgroundColor: 'lightgray', alignItems: 'center', boxShadow: '2px 2px' }}>
-                <label style={{textAlign: 'center'}}>Sort Required?
-                    <div className="row" style={{alignItems: 'center'}}>
+                <div className="row">
+                    <div className="col">
+                        <div style={{ textAlign: 'center' }}>
+                            <br></br>
+                            <label>Sort Required?</label>
+                        </div>
                         <input type="checkbox" className="form-control" checked={localsort.sortRequired} onChange={handleChange} name="sortRequired" />
                         <br></br>
-                        <div className="col">{SortType}</div>
-                        <div className="col">{SortOrder}</div>
-                        <div className="col">{SortButton}</div>
                     </div>
-                </label>
+                    <div className="col">
+                        <br></br>
+                        {SortType}
+                        {SortOrder}
+                    </div>
+                    <div className="col">
+                        <br></br>
+                        {SortButton}
+                    </div>
+                    <br></br>
+                </div>
             </div>
         </>
     )

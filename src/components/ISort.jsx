@@ -87,7 +87,7 @@ export default function ISort() {
                 <button className="btn btn-success" onClick={submitForm}>Sort</button>
                 <br></br>
                 <br></br>
-                <button className="btn btn-danger" onClick={resetForm}>Reset</button>
+                <button className="btn btn-danger" onClick={resetForm}>Reset Sort</button>
             </div>
         );
     }

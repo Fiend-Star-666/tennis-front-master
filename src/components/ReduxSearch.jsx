@@ -7,9 +7,7 @@ export default function ReduxSearch(){
         return (
             <>
                 {ISearchForm()}
-                <br></br>
                 {ISort()}
-                <br></br>
                 {IITable()}
             </>
         )

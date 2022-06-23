@@ -47,7 +47,7 @@ export default function ISearchForm() {
         <>
             <br></br>
             <br></br>
-            <div className='card' style={{ width: 'auto', backgroundColor: 'lightgray', alignItems: 'center', boxShadow: '2px 2px' }}>
+            <div className='card' style={{ width: 'auto', backgroundColor: 'lightgray', alignItems: 'center', boxShadow: '2px 0px' }}>
                 <div className="row">
                     <div className='col'>
                         <label>Search By Name</label>

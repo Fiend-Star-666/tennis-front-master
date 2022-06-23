@@ -3,8 +3,8 @@ import { createSlice } from '@reduxjs/toolkit'
 const initialState = {
     value: {
         sortRequired: false,
-        sortType: 'rankOfPlayer',
-        sortOrder: 'asc'
+        sortType: '',
+        sortOrder: ''
     }
 }
 
@@ -19,8 +19,8 @@ export const sortHandlerSlice = createSlice({
         },
         resetSort: (state) => {
             state.value.sortRequired = false;
-            state.value.sortType = 'rankOfPlayer';
-            state.value.sortOrder = 'asc';
+            state.value.sortType = '';
+            state.value.sortOrder = '';
         }
     },
 })

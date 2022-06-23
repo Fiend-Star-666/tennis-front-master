@@ -92,6 +92,7 @@ export default function IITable() {
                 &emsp;
                 &emsp;
             </div>
+            <br></br>
             <div className="row">
                 <table className="table table-striped table-bordered">
                     <thead>

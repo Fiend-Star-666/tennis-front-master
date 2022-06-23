@@ -95,18 +95,17 @@ export default function ISort() {
 
     return (
         <>
-            <br></br>
-            <div style={{ width: 'auto', backgroundColor: 'lightgray', alignItems: 'center', boxShadow: '2px 2px' }}>
-                <label>Sort Required?
-                    <div className="row">
+            <div style={{ backgroundColor: 'lightgray', alignItems: 'center', boxShadow: '2px 2px' }}>
+                <label style={{textAlign: 'center'}}>Sort Required?
+                    <div className="row" style={{alignItems: 'center'}}>
                         <input type="checkbox" className="form-control" checked={localsort.sortRequired} onChange={handleChange} name="sortRequired" />
+                        <br></br>
                         <div className="col">{SortType}</div>
                         <div className="col">{SortOrder}</div>
                         <div className="col">{SortButton}</div>
                     </div>
                 </label>
             </div>
-            <br></br>
         </>
     )
 }

@@ -53,13 +53,14 @@ export default function IITable() {
                 }));
             });
         }
+        
         else {
             dispatch(resetSearch());
             dispatch(resetSort());
             dispatch(resetPageValues());
             setPlayersData([]);
         }
-    }, [searchForm, sortForm, pageForm, dispatch]);
+    }, [searchForm, sortForm, pageForm]);
 
     return (
         <>

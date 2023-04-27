@@ -8,7 +8,7 @@ export default function ReduxSearch(){
         return (
             <>
                 {ISearchForm()}
-                {ISort()}
+                <ISort/>
                 {IPage()}
                 {IITable()}
             </>
